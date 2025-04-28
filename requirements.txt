@@ -4,3 +4,4 @@ openai
 python-multipart
 whisper
 reportlab
+requests
