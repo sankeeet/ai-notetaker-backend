@@ -1,6 +1,8 @@
 import os
 import requests
+from dotenv import load_dotenv
 
+load_dotenv()  # Load environment variables
 ASSEMBLYAI_API_KEY = os.getenv("ASSEMBLYAI_API_KEY")
 
 def transcribe_audio(audio_file_path):
