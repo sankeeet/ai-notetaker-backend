@@ -1,12 +1,12 @@
 import os
 import requests
 
-ASSEMBLYAI_API_KEY = os.getenv('ASSEMBLYAI_API_KEY')
+ASSEMBLYAI_API_KEY = os.getenv('90d54d8fadd44fb9b21e7f7383f0ed0f')
 
 def transcribe_audio(audio_file_path):
     try:
         # Upload audio file to AssemblyAI
-        headers_auth = {'authorization': ASSEMBLYAI_API_KEY}
+        headers_auth = {'authorization': 90d54d8fadd44fb9b21e7f7383f0ed0f}
         upload_url = 'https://api.assemblyai.com/v2/upload'
 
         with open(audio_file_path, 'rb') as f:
