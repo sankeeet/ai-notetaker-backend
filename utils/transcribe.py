@@ -2,7 +2,7 @@ import requests
 import time
 import os
 
-assemblyai_api_key = os.getenv("ASSEMBLYAI_API_KEY")
+assemblyai_api_key = os.getenv("90d54d8fadd44fb9b21e7f7383f0ed0f")
 
 def transcribe_audio(path):
     headers = {'authorization': assemblyai_api_key}
