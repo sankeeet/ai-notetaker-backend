@@ -1,14 +1,14 @@
-import openai
+from openai import OpenAI
 import os
 
-openai.api_key = os.getenv("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")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def summarize_text(text):
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
+    response = client.chat.completions.create(
+        model="gpt-4o",
         messages=[
-            {"role": "system", "content": "You are a helpful AI assistant that summarizes meeting transcripts."},
-            {"role": "user", "content": f"Please summarize this meeting: {text}"}
+            {"role": "system", "content": "You are a helpful AI that summarizes meeting transcripts in 50 words or less."},
+            {"role": "user", "content": f"Summarize this meeting: {text}"}
         ]
     )
-    return response.choices[0].message["content"]
+    return response.choices[0].message.content
