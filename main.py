@@ -43,3 +43,8 @@ async def generate_pdf(summary: str, transcript: str):
     filename = "meeting_notes.pdf"
     create_pdf(summary, transcript, filename)
     return FileResponse(path=filename, filename=filename, media_type='application/pdf')
+
+@app.get("/")
+async def read_root():
+    return {"message": "AI Notetaker API is live!"}
+
