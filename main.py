@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/upload/")
+@app.post("/upload")
 async def upload_audio(file: UploadFile = File(...)):
     path = f"uploads/{file.filename}"
     with open(path, "wb") as buffer:
