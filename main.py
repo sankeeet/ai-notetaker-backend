@@ -1,3 +1,4 @@
+import tempfile
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
@@ -19,15 +20,18 @@ app.add_middleware(
 
 @app.post("/upload")
 async def upload_audio(file: UploadFile = File(...)):
-    path = f"uploads/{file.filename}"
-    with open(path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
+    # Use tempfile to create a temporary file
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        temp_file.write(await file.read())  # Write the uploaded file to the temp file
+        temp_file_path = temp_file.name  # Get the path to the temporary file
 
-    transcript = transcribe_audio(path)
-    summary = summarize_text(transcript)
-    resources = get_learning_materials(summary)
+    try:
+        transcript = transcribe_audio(temp_file_path)
+        summary = summarize_text(transcript)
+        resources = get_learning_materials(summary)
+    finally:
+        os.remove(temp_file_path)  # Clean up the temporary file
 
-    os.remove(path)
     return {
         "transcript": transcript,
         "summary": summary,
